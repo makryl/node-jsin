@@ -1,3 +1,3 @@
 #!/bin/sh
 
-node ../jsinc *.jsin compiled.js
+node ../jsinc *.jsin jsin.compiled.js

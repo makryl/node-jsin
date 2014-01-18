@@ -1,6 +1,6 @@
 var include = require('../index').include;
 
-include('index', {
+include('mytemplate', {
     boo: 'booooooo'
 }, function(err, res) {
     if (err) {

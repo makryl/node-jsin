@@ -8,29 +8,6 @@ print(boo);
 print("</p>\n</div>\n");
 }}
 },
-'index': function() {
-with(this){with(__data){
-print("<!doctype html>\n    <?");
-print("xml encoding=\"utf-8\" ?><!-- indent is not a bug, but check -->\n<h1>Example</h1>\n<p>\n    ");
-print("Check ?>'\"special chars and variable "+ boo);
-print("\n</p>\n<p>\n");
-if (1 === 1) {;
-print("        1 === 1\n");
-} else {;
-print("        1 !== 1\n");
-};
-print("</p>\n");
-include('include');
-
-print("<p>Example print</p>\n");;
-layout('layout', function(){;
-print("        <div>\n            <p>Example layout inside</p>\n");
-include('layout-include-inside');
-print("        </div>\n");
-});
-print("\n<p>Thanx!</p>\n");
-}}
-},
 'layout-include-inside': function() {
 with(this){with(__data){
 print("            <div>\n                <p>Example include inside layout with variable ");
@@ -54,6 +31,29 @@ contents();
 print("    </div>\n");
 include('layout-include');
 print("    <p>Example layout end</p>\n</div>\n");
+}}
+},
+'mytemplate': function() {
+with(this){with(__data){
+print("<!doctype html>\n    <?");
+print("xml encoding=\"utf-8\" ?><!-- indent is not a bug, but check -->\n<h1>Example</h1>\n<p>\n    ");
+print("Check ?>'\"special chars and variable "+ boo);
+print("\n</p>\n<p>\n");
+if (1 === 1) {;
+print("        1 === 1\n");
+} else {;
+print("        1 !== 1\n");
+};
+print("</p>\n");
+include('include');
+
+print("<p>Example print</p>\n");;
+layout('layout', function(){;
+print("        <div>\n            <p>Example layout inside</p>\n");
+include('layout-include-inside');
+print("        </div>\n");
+});
+print("\n<p>Thanx!</p>\n");
 }}
 }
 };
