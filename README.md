@@ -54,7 +54,7 @@ include('mytemplate', {
 ### Client side
 
 ```sh
-$ jsinc path/to/*.jsin compiled.js
+$ jsinc path/to/*.jsin jsin.compiled.js
 ```
 
 Options:
@@ -63,7 +63,7 @@ Options:
 * `-u` - uglify
 
 ```html
-<script src="compiled.js"></script>
+<script src="jsin.compiled.js"></script>
 <script>
     var res = jsin.include('mytemplate', {
         boo: 'booooo'
