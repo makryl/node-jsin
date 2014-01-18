@@ -51,21 +51,24 @@ include('mytemplate', {
 });
 ```
 
-Options:
-
-* `-b` - beautify
-* `-u` - uglify
-
 ### Client side
 
 ```sh
 $ jsinc path/to/*.jsin compiled.js
 ```
 
+Options:
+
+* `-b` - beautify
+* `-u` - uglify
+
 ```html
 <script src="compiled.js"></script>
 <script>
-    document.getElementById('res').innerHTML = jsin.include('mytemplate', {boo: 'booooo'});
+    var res = jsin.include('mytemplate', {
+        boo: 'booooo'
+    });
+    document.getElementById('res').innerHTML = res;
 </script>
 ```
 

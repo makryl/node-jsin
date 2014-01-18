@@ -12,7 +12,10 @@
         <div id="res"></div>
         <script src="compiled.js"></script>
         <script>
-            document.getElementById('res').innerHTML = jsin.include('index', {boo: 'booooo'});
+            var res = jsin.include('index', {
+                boo: 'booooo'
+            });
+            document.getElementById('res').innerHTML = res;
         </script>
     </body>
 </html>
