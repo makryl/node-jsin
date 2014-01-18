@@ -58,7 +58,6 @@ $ jsinc path/to/*.jsin compiled.js
 ```
 
 Options:
-
 * `-b` - beautify
 * `-u` - uglify
 
