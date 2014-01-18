@@ -1,0 +1,25 @@
+{
+    "name": "jsin",
+    "version": "0.1.0",
+    "description": "JSIN - Javascript Include",
+    "keywords": ["include", "render", "compile", "template", "html"],
+    "homepage": "https://github.com/Aequiternus/node-jsin",
+    "bugs": "https://github.com/Aequiternus/node-jsin/issues",
+    "license": "MPL-2.0",
+    "author": {
+        "name": "Maksim Krylosov",
+        "email": "aequitenrus@gmail.com",
+        "url": "http://aeqdev.com/"
+    },
+    "bin": {
+        "jsinc": "./jsinc.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/Aequiternus/node-jsin.git"
+    },
+    "optionalDependencies": {
+        "js-beautify": "~1.4",
+        "uglify-js": "~1.3"
+    }
+}

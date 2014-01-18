@@ -1,0 +1,3 @@
+    <div>
+        <p>Example include in layout with variable <?= boo ?></p>
+    </div>

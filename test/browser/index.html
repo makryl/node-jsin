@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+        <title>JSIN - Javascript Include</title>
+        <style>
+            div {
+                padding-left: 1.5em;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="res"></div>
+        <script src="compiled.js"></script>
+        <script>
+            document.getElementById('res').innerHTML = jsin.include('index', {boo: 'booooo'});
+        </script>
+    </body>
+</html>

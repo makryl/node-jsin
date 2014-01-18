@@ -1,0 +1,28 @@
+<!doctype html>
+    <?xml encoding="utf-8" ?><!-- indent is not a bug, but check -->
+<h1>Example</h1>
+<p>
+    <?= "Check ?>'\" special chars and variable " + boo ?>
+</p>
+<p>
+    <?js if (1 === 1) { ?>
+        1 === 1
+    <?js } else { ?>
+        1 !== 1
+    <?js } ?>
+</p>
+<?js
+
+include('include');
+
+print("<p>Example print</p>\n");
+
+?>
+<?js layout('layout', function(){ ?>
+        <div>
+            <p>Example layout inside</p>
+            <?js include('layout-include-inside') ?>
+        </div>
+<?js }) ?>
+
+<p>Thanx!</p>

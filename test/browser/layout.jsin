@@ -1,0 +1,8 @@
+<div>
+    <p>Example layout begin with variable <?= boo ?></p>
+    <div>
+        <?js contents() ?>
+    </div>
+    <?js include('layout-include') ?>
+    <p>Example layout end</p>
+</div>
