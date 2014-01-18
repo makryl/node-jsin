@@ -1,8 +1,8 @@
 {
     "name": "jsin",
-    "version": "0.1.1",
-    "description": "JSIN (Javascript Include) - template engine for use at server and client side.",
-    "keywords": ["include", "render", "compile", "template", "html"],
+    "version": "0.1.2",
+    "description": "JSIN - template engine. Server and client side. Includes, layouts. Async compiling. Pre-compiling for browser.",
+    "keywords": ["template", "include", "render", "compile", "layout", "pre-compile", "server", "client", "browser"],
     "homepage": "https://github.com/Aequiternus/node-jsin",
     "bugs": "https://github.com/Aequiternus/node-jsin/issues",
     "license": "MPL-2.0",

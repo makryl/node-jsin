@@ -4,10 +4,11 @@ Template engine for use at server and client side.
 
 ## Features
 
-- Well-known PHP-like syntax.
+- Well-known PHP-like template tags.
 - Accurate quote parsing.
 - Asynchronous compiling of templates on the fly.
 - Pre-compiling for use in browser.
+- Supports includings and layoutings.
 
 ## Usage
 
