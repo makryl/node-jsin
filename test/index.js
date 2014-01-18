@@ -1,4 +1,4 @@
-var include = require('./jsin').include;
+var include = require('../index').include;
 
 include('index', {
     boo: 'booooooo'
