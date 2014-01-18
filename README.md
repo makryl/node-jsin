@@ -74,7 +74,7 @@ print("<p>Example print</p>\n");
 ```js
 var include = require('jsin').include;
 
-# you can omit extension .jsin or .js
+// you can omit extension .jsin or .js
 include('mytemplate', {
     boo: 'booooooo'
 }, function(err, res) {
