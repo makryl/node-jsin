@@ -59,7 +59,7 @@ print("\n<p>Thanx!</p>\n");
 };
 
 function include(template, data, callback) {
-    template = template.replace(/\.jsin$/, '');
+    template = template.replace(/\.js(in)?$/, '');
 
     if ('function' === typeof data) {
         callback = data;

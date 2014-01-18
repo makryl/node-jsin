@@ -1,6 +1,6 @@
 /**
  * https://github.com/Aequiternus/node-jsin
- * v 0.1.0
+ * v 0.1.1
  *
  * Copyright © 2014 Krylosov Maksim <Aequiternus@gmail.com>
  *
@@ -17,7 +17,7 @@ exports.compiled = compiled;
 var fs = require('fs');
 
 function compile(template, callback) {
-    template = template.replace(/\.jsin$/, '');
+    template = template.replace(/\.js(in)?$/, '');
 
     if (compiled[template]) {
         callback();

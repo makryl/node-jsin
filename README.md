@@ -1,12 +1,34 @@
 # JSIN - Javascript Include
 
+Template engine for use at server and client side.
+
+## Features
+
+- Well-known PHP-like syntax.
+- Accurate quote parsing.
+- Asynchronous compiling of templates on the fly.
+- Pre-compiling for use in browser.
+
 ## Usage
 
-### Template
+### Syntax
+
+Constructions:
+
+- `<?js /* any javascript code */ ?>`
+- `<?= /* print value or result of expression */ ?>`
+
+Functions:
+
+- `print(string)`
+- `include(template, [data])`
+- `layout(template, [data], callback)`
+- `contents()`
+
+### Example
 
 ```html
-<!doctype html>
-    <?xml encoding="utf-8" ?><!-- indent is not a bug, but check -->
+<!-- mytemplate.jsin -->
 <h1>Example</h1>
 <p>
     <?= "Check ?>'\" special chars and variable " + boo ?>
@@ -35,11 +57,24 @@ print("<p>Example print</p>\n");
 <p>Thanx!</p>
 ```
 
+```html
+<!-- layout.jsin -->
+<div>
+    <p>Example layout begin with variable <?= boo ?></p>
+    <div>
+        <?js contents() ?>
+    </div>
+    <?js include('layout-include') ?>
+    <p>Example layout end</p>
+</div>
+```
+
 ### Server side
 
 ```js
 var include = require('jsin').include;
 
+# you can omit extension .jsin or .js
 include('mytemplate', {
     boo: 'booooooo'
 }, function(err, res) {
@@ -53,14 +88,18 @@ include('mytemplate', {
 
 ### Client side
 
+Compile client-side script using `jsinc` command-line tool:
+
 ```sh
 $ jsinc path/to/*.jsin jsin.compiled.js
 ```
 
-Options:
+Additional options:
 
-* `-b` - beautify
-* `-u` - uglify
+- `-b` - beautify
+- `-u` - uglify
+
+In browser:
 
 ```html
 <script src="jsin.compiled.js"></script>
