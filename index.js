@@ -1,6 +1,6 @@
 /**
  * https://github.com/Aequiternus/node-jsin
- * v 0.1.2
+ * v 0.1.3
  *
  * Copyright © 2014 Krylosov Maksim <Aequiternus@gmail.com>
  *

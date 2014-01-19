@@ -1,28 +1,32 @@
 (function(w){
 
-var compiled = {
-'include': function() {
+if (!w.jsin) w.jsin = {compiled: {}};
+
+w.jsin.compiled['include'] = function() {
 with(this){with(__data){
 print("<div>\n    <p>Example include with variable ");
 print(boo);
 print("</p>\n</div>\n");
 }}
-},
-'layout-include-inside': function() {
+};
+
+w.jsin.compiled['layout-include-inside'] = function() {
 with(this){with(__data){
 print("            <div>\n                <p>Example include inside layout with variable ");
 print(boo);
 print("</p>\n            </div>\n");
 }}
-},
-'layout-include': function() {
+};
+
+w.jsin.compiled['layout-include'] = function() {
 with(this){with(__data){
 print("    <div>\n        <p>Example include in layout with variable ");
 print(boo);
 print("</p>\n    </div>\n");
 }}
-},
-'layout': function() {
+};
+
+w.jsin.compiled['layout'] = function() {
 with(this){with(__data){
 print("<div>\n    <p>Example layout begin with variable ");
 print(boo);
@@ -32,8 +36,9 @@ print("    </div>\n");
 include('layout-include');
 print("    <p>Example layout end</p>\n</div>\n");
 }}
-},
-'mytemplate': function() {
+};
+
+w.jsin.compiled['mytemplate'] = function() {
 with(this){with(__data){
 print("<!doctype html>\n    <?");
 print("xml encoding=\"utf-8\" ?><!-- indent is not a bug, but check -->\n<h1>Example</h1>\n<p>\n    ");
@@ -55,8 +60,9 @@ print("        </div>\n");
 });
 print("\n<p>Thanx!</p>\n");
 }}
-}
 };
+
+var compiled = jsin.compiled;
 
 function include(template, data, callback) {
     template = template.replace(/\.js(in)?$/, '');
@@ -171,6 +177,7 @@ context.prototype.__hold = function() {
     return ph;
 };
 
-w.jsin = {include: include, context: context};
+w.jsin.include = include;
+w.jsin.context = context;
 
 })(window);

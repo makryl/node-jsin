@@ -2,7 +2,7 @@
 
 /**
  * https://github.com/Aequiternus/node-jsin
- * v 0.1.2
+ * v 0.1.3
  *
  * Copyright © 2014 Krylosov Maksim <Aequiternus@gmail.com>
  *
@@ -21,20 +21,30 @@ if ('node' === process.argv[i++]) {
 }
 
 var needBeautify = false;
-if ('-b' === process.argv[i]) {
-    needBeautify = true;
-    i++;
-}
-
 var needUglify = false;
-if ('-u' === process.argv[i]) {
-    needUglify = true;
-    i++;
-}
-
+var templatesOnly = false;
 var files = [];
-while (i < process.argv.length - 1) {
-    files.push(process.argv[i++]);
+
+var opts = true;
+var l = process.argv.length - 1;
+while (i < l) {
+    var v = process.argv[i++];
+    if (opts) {
+        switch (v) {
+            case '-b':
+                needBeautify = true;
+                continue;
+            case '-u':
+                needUglify = true;
+                continue;
+            case '-t':
+                templatesOnly = true;
+                continue;
+            default:
+                opts = false;
+        }
+    }
+    files.push(v);
 }
 
 var outfile = process.argv[i++];
@@ -91,25 +101,25 @@ function compileTemplates() {
 function compileForBrowser() {
     console.log('Compiling for browser');
 
-    code = "(function(w){\n\n";
+    code = "(function(w){\n\nif (!w.jsin) w.jsin = {compiled: {}};\n\n";
 
-    code += "var compiled = {\n";
     for (var name in jsin.compiled) {
-        code += "'" + name + "': " + jsin.compiled[name] + ",\n";
+        code += "w.jsin.compiled['" + name + "'] = "
+            + jsin.compiled[name].toString().replace(/ anonymous/g, '') + ";\n\n";
     }
-    code = code
-        .substr(0, code.length - 2)
-        .replace(/ anonymous/g, '')
-        + "\n};\n\n";
 
-    code += jsin.render.toString()
-        .replace('function render(', 'function include(');
+    if (!templatesOnly) {
+        code += "var compiled = jsin.compiled;\n\n";
 
-    var find = "/* BROWSER COMPATIBLE */";
-    code += contextCode
-        .substr(contextCode.indexOf(find) + find.length);
+        code += jsin.render.toString().replace('function render(', 'function include(');
 
-    code += "\nw.jsin = {include: include, context: context};\n\n})(window);\n";
+        var find = "/* BROWSER COMPATIBLE */";
+        code += contextCode.substr(contextCode.indexOf(find) + find.length);
+
+        code += "\nw.jsin.include = include;\nw.jsin.context = context;\n\n";
+    }
+
+    code += "})(window);\n";
 
     next();
 }
