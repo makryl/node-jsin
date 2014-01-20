@@ -1,6 +1,6 @@
 {
     "name": "jsin",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "JSIN - template engine. Server and client side. Includes, layouts. Async compiling. Pre-compiling for browser.",
     "keywords": ["template", "include", "render", "compile", "layout", "pre-compile", "server", "client", "browser"],
     "homepage": "https://github.com/Aequiternus/node-jsin",
