@@ -1,8 +1,8 @@
 /**
  * https://github.com/Aequiternus/node-jsin
- * v 0.1.4
+ * v 0.1.5
  *
- * Copyright © 2014 Krylosov Maksim <Aequiternus@gmail.com>
+ * Copyright © 2014 Maksim Krylosov <Aequiternus@gmail.com>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this

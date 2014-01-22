@@ -73,10 +73,12 @@ print("<p>Example print</p>\n");
 ### Server side
 
 ```js
-var include = require('jsin').include;
+var jsin = require('jsin');
+
+jsin.setDirectory('path/to/templates');
 
 // you can omit extension .jsin
-include('mytemplate', {
+jsin.include('mytemplate', {
     boo: 'booooooo'
 }, function(err, res) {
     if (err) {
@@ -95,10 +97,18 @@ Compile client-side script using `jsinc` command-line tool:
 $ jsinc path/to/*.jsin jsin.compiled.js
 ```
 
-Additional options:
+or
 
-- `-b` - beautify
-- `-u` - uglify
+```sh
+$ jsinc -d path/to/jsin/dir jsin.compiled.js
+```
+
+Options:
+
+- `-d` - compile all files in directory and subdirectories, excluding this directory from template names.
+- `-t` - compile templates only, exclude definition of jsin object.
+- `-b` - beautify.
+- `-u` - uglify.
 
 In browser:
 
@@ -114,7 +124,7 @@ In browser:
 
 ## License
 
-Copyright © 2014 Krylosov Maksim <Aequiternus@gmail.com>
+Copyright © 2014 Maksim Krylosov <Aequiternus@gmail.com>
 
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this

@@ -1,8 +1,8 @@
 /**
  * https://github.com/Aequiternus/node-jsin
- * v 0.1.4
+ * v 0.1.5
  *
- * Copyright © 2014 Krylosov Maksim <Aequiternus@gmail.com>
+ * Copyright © 2014 Maksim Krylosov <Aequiternus@gmail.com>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,13 +12,16 @@
 exports.include = include;
 exports.render = render;
 
-var compile = require('./compiler').compile;
-var compiled = require('./compiler').compiled;
+var compiler = require('./compiler');
+var compile = compiler.compile;
+var compiled = compiler.compiled;
+var setDirectory = compiler.setDirectory;
 var context = require('./context');
 
 exports.context = context;
 exports.compile = compile;
 exports.compiled = compiled;
+exports.setDirectory = setDirectory;
 
 function include(template, data, callback) {
     compile(template, function() {

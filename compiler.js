@@ -1,8 +1,8 @@
 /**
  * https://github.com/Aequiternus/node-jsin
- * v 0.1.4
+ * v 0.1.5
  *
- * Copyright © 2014 Krylosov Maksim <Aequiternus@gmail.com>
+ * Copyright © 2014 Maksim Krylosov <Aequiternus@gmail.com>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -10,11 +10,17 @@
  */
 
 var compiled = {};
+var directory = '';
 
 exports.compile = compile;
 exports.compiled = compiled;
+exports.setDirectory = setDirectory;
 
 var fs = require('fs');
+
+function setDirectory(dir) {
+    directory = dir;
+}
 
 function compile(template, callback) {
     template = template.replace(/\.jsin$/, '');
@@ -22,7 +28,11 @@ function compile(template, callback) {
     if (compiled[template]) {
         callback();
     } else {
-        fs.readFile(template + '.jsin', function(err, res) {
+        var templatePath = template + '.jsin';
+        if (directory) {
+            templatePath = directory + '/' + templatePath;
+        }
+        fs.readFile(templatePath, function(err, res) {
             try {
                 if (err) throw err;
                 compiled[template] = compileCode(res.toString());
