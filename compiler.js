@@ -29,7 +29,7 @@ function compile(template, callback) {
         callback();
     } else {
         var templatePath = template + '.jsin';
-        if (directory) {
+        if (directory && !template.match(/^\.?\//)) {
             templatePath = directory + '/' + templatePath;
         }
         fs.readFile(templatePath, function(err, res) {
