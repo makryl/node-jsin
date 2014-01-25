@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 
 /**
- * https://github.com/Aequiternus/node-jsin
- * v 0.1.5
- *
  * Copyright © 2014 Maksim Krylosov <Aequiternus@gmail.com>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
