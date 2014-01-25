@@ -34,7 +34,7 @@ function render(template, data, callback) {
 
     if ('function' === typeof data) {
         callback = data;
-        delete data;
+        data = null;
     }
 
     try {
