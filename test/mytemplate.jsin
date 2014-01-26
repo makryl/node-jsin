@@ -3,6 +3,10 @@
 <h1>Example</h1>
 <p>
     <?= "Check ?>'\" special chars and variable " + boo ?>
+<p>
+    <?h= "Check html escaping &<>\"" ?>
+<p>
+    <?s= "Check script escaping \\\n\r\"\'" ?>
 </p>
 <p>
     <?js if (1 === 1) { ?>

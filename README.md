@@ -18,6 +18,8 @@ Constructions:
 
 - `<?js /* any javascript code */ ?>`
 - `<?= /* print value or result of expression */ ?>`
+- `<?h= /* print value or result of expression with escaped html special chars <>&" */ ?>`
+- `<?s= /* print value or result of expression with backslashed script special chars \\n\r"' */ ?>`
 
 Functions:
 
@@ -33,6 +35,10 @@ Functions:
 <h1>Example</h1>
 <p>
     <?= "Check ?>'\" special chars and variable " + boo ?>
+<p>
+    <?h= "Check html escaping &<>\"" ?>
+<p>
+    <?s= "Check script escaping \\\n\r\"\'" ?>
 </p>
 <p>
     <?js if (1 === 1) { ?>

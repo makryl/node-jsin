@@ -25,6 +25,37 @@ context.prototype.print = function(string) {
     this.__result[this.__current] += string;
 };
 
+var ehs = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;'
+};
+
+function eh(s) {
+    return ehs[s] || s;
+}
+
+context.prototype.printh = function(string) {
+    this.print(string.replace(/[&<>"]/g, eh));
+};
+
+var ess = {
+    "\\": "\\\\",
+    "\n": "\\n",
+    "\r": "\\r",
+    '"': '\\"',
+    "'": "\\'"
+};
+
+function es(s) {
+    return ess[s] || s;
+}
+
+context.prototype.prints = function(string) {
+    this.print(string.replace(/[\\\n\r"']/g, es));
+}
+
 context.prototype.include = function(template, data) {
     if (!data) {
         data = this.__data;

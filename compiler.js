@@ -54,6 +54,11 @@ function compileCode(tpl) {
             code.push("print(");
             tpl = closeTag(code, tpl.substr(p + 3));
             code.push(");\n");
+        } else if ('=' === tpl[p + 3] && tpl[p + 2].match(/[hs]/)) {
+            addOutput(code, tpl.substr(0, p));
+            code.push("print" + tpl[p + 2] + "(");
+            tpl = closeTag(code, tpl.substr(p + 4));
+            code.push(");\n");
         } else if ('js' === tpl.substr(p + 2, 2)) {
             addOutput(code, tpl.substr(0, p).replace(/ *$/, '')); // eat leading space
             tpl = closeTag(code, tpl.substr(p + 4), true);
@@ -72,15 +77,22 @@ function compileCode(tpl) {
     return new Function(code.join(''));
 }
 
+var eos = {
+    "\\": "\\\\",
+    "\n": "\\n",
+    "\r": "\\r",
+    '"': '\\"'
+};
+
+function eo(s) {
+    return eos[s] || s;
+}
+
 function addOutput(code, string) {
     if ('' !== string) {
         code.push(
             "print(\""
-            + string
-                .replace(/\\/g, '\\\\')
-                .replace(/\n/g, '\\n')
-                .replace(/\r/g, '\\r')
-                .replace(/"/g, '\\"')
+            + string.replace(/[\\\n\r"]/g, eo)
             + "\");\n"
         );
     }

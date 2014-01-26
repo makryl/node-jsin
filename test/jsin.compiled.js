@@ -1,4 +1,4 @@
-/* Compiled with jsinc v 0.1.5 */
+/* Compiled with jsinc v 0.1.7 */
 (function(w){
 
 if (!w.jsin) w.jsin = {compiled: {}};
@@ -44,6 +44,10 @@ with(this){with(__data){
 print("<!doctype html>\n    <?");
 print("xml encoding=\"utf-8\" ?><!-- indent is not a bug, but check -->\n<h1>Example</h1>\n<p>\n    ");
 print("Check ?>'\"special chars and variable "+ boo);
+print("\n<p>\n    ");
+printh("Check html escaping &<>\"");
+print("\n<p>\n    ");
+prints("Check script escaping \\\n\r\"\'");
 print("\n</p>\n<p>\n");
 if (1 === 1) {;
 print("        1 === 1\n");
@@ -70,7 +74,7 @@ function include(template, data, callback) {
 
     if ('function' === typeof data) {
         callback = data;
-        delete data;
+        data = null;
     }
 
     try {
@@ -102,6 +106,37 @@ function context(data, callback) {
 context.prototype.print = function(string) {
     this.__result[this.__current] += string;
 };
+
+var ehs = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;'
+};
+
+function eh(s) {
+    return ehs[s] || s;
+}
+
+context.prototype.printh = function(string) {
+    this.print(string.replace(/[&<>"]/g, eh));
+};
+
+var ess = {
+    "\\": "\\\\",
+    "\n": "\\n",
+    "\r": "\\r",
+    '"': '\\"',
+    "'": "\\'"
+};
+
+function es(s) {
+    return ess[s] || s;
+}
+
+context.prototype.prints = function(string) {
+    this.print(string.replace(/[\\\n\r"']/g, es));
+}
 
 context.prototype.include = function(template, data) {
     if (!data) {
