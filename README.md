@@ -24,6 +24,8 @@ Constructions:
 Functions:
 
 - `print(string)`
+- `printh(string)`
+- `prints(string)`
 - `include(template, [data])`
 - `layout(template, [data], callback)`
 - `contents()`
