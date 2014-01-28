@@ -7,6 +7,7 @@
  */
 
 var compiled = {};
+var mtime = {};
 var directory = '';
 
 exports.compile = compile;
@@ -22,13 +23,26 @@ function setDirectory(dir) {
 function compile(template, callback) {
     template = template.replace(/\.jsin$/, '');
 
+    var templatePath = template + '.jsin';
+    if (directory && !template.match(/^\.?\//)) {
+        templatePath = directory + '/' + templatePath;
+    }
+
     if (compiled[template]) {
         callback();
+        
+        fs.stat(templatePath, function(err, stats) {
+            if (err) return;
+            var t = stats.mtime.getTime();
+            if (mtime[template]) {
+                if (mtime[template] < t) {
+                    delete compiled[template];
+                }
+            } else {
+                mtime[template] = t;
+            }
+        });
     } else {
-        var templatePath = template + '.jsin';
-        if (directory && !template.match(/^\.?\//)) {
-            templatePath = directory + '/' + templatePath;
-        }
         fs.readFile(templatePath, function(err, res) {
             try {
                 if (err) throw err;
