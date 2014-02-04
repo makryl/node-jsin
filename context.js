@@ -83,6 +83,11 @@ context.prototype.layout = function(template, data, callback) {
         data = this.__data;
     }
 
+    if (data.excludeLayout && -1 !== data.excludeLayout.indexOf(template)) {
+        callback();
+        return;
+    }
+
     var self = this;
     var bgn = this.__hold();
     callback();
