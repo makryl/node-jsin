@@ -30,7 +30,7 @@ function compile(template, callback) {
 
     if (compiled[template]) {
         callback();
-        
+
         fs.stat(templatePath, function(err, stats) {
             if (err) return;
             var t = stats.mtime.getTime();
@@ -63,23 +63,27 @@ function compileCode(tpl) {
     code.push("with(this){with(__data){\n");
 
     while (-1 !== (p = tpl.indexOf('<?'))) {
-        if ('=' === tpl[p + 2]) {
+        var p2 = p + 2,
+            c2 = tpl[p2],
+            p3 = p + 3,
+            c3 = tpl[p3];
+        if ('=' === c2) {
             addOutput(code, tpl.substr(0, p));
             code.push("print(");
-            tpl = closeTag(code, tpl.substr(p + 3));
+            tpl = closeTag(code, tpl.substr(p3));
             code.push(");\n");
-        } else if ('=' === tpl[p + 3] && tpl[p + 2].match(/[hs]/)) {
+        } else if (('h' === c2 || 's' === c2) && '=' === c3) {
             addOutput(code, tpl.substr(0, p));
-            code.push("print" + tpl[p + 2] + "(");
+            code.push("print" + c2 + "(");
             tpl = closeTag(code, tpl.substr(p + 4));
             code.push(");\n");
-        } else if ('js' === tpl.substr(p + 2, 2)) {
-            addOutput(code, tpl.substr(0, p).replace(/ *$/, '')); // eat leading space
+        } else if ('j' === c2 && 's' === c3) {
+            addOutput(code, tpl.substr(0, p).replace(/[ \t]+$/, '')); // eat leading space
             tpl = closeTag(code, tpl.substr(p + 4), true);
             code.push(";\n");
         } else {
-            addOutput(code, tpl.substr(0, p + 2));
-            tpl = tpl.substr(p + 2);
+            addOutput(code, tpl.substr(0, p2));
+            tpl = tpl.substr(p2);
         }
     }
     if (tpl) {
