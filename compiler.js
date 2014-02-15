@@ -13,11 +13,18 @@ var directory = '';
 exports.compile = compile;
 exports.compiled = compiled;
 exports.setDirectory = setDirectory;
+exports.clear = clear;
 
 var fs = require('fs');
 
 function setDirectory(dir) {
     directory = dir;
+}
+
+function clear() {
+    for (var template in compiled) {
+        delete compiled[template];
+    }
 }
 
 function compile(template, callback) {

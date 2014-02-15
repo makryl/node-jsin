@@ -10,18 +10,17 @@ exports.include = include;
 exports.render = render;
 
 var compiler = require('./compiler');
-var compile = compiler.compile;
 var compiled = compiler.compiled;
-var setDirectory = compiler.setDirectory;
 var context = require('./context');
 
 exports.context = context;
-exports.compile = compile;
-exports.compiled = compiled;
-exports.setDirectory = setDirectory;
+exports.compile = compiler.compile;
+exports.compiled = compiler.compiled;
+exports.setDirectory = compiler.setDirectory;
+exports.clear = compiler.clear;
 
 function include(template, data, callback) {
-    compile(template, function() {
+    compiler.compile(template, function() {
         render(template, data, callback);
     });
 }
