@@ -136,7 +136,7 @@ function closeTag(code, tpl, eatNewLine) {
         ) {
             code.push(q);
             while (-1 !== (p = tpl.indexOf(q))) {
-                code.push(tpl.substr(0, p + 1).trim());
+                code.push(tpl.substr(0, p + 1));
                 var s = tpl[p - 1];
                 tpl = tpl.substr(p + 1);
                 if ('\\' !== s) {
