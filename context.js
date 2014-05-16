@@ -32,12 +32,29 @@ var ehs = {
     '"': '&quot;'
 };
 
+var ehas = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;'
+};
+
 function eh(s) {
     return ehs[s] || s;
 }
 
-context.prototype.printh = function(string) {
-    this.print(string.replace(/[&<>"]/g, eh));
+function eha(s) {
+    return ehas[s] || s;
+}
+
+context.prototype.printh = function(string, apos) {
+    if ('undefined' !== typeof string) {
+        if (apos) {
+            this.print(string.replace(/[&<>']/g, eha));
+        } else {
+            this.print(string.replace(/[&<>"]/g, eh));
+        }
+    }
 };
 
 var ess = {
@@ -53,7 +70,9 @@ function es(s) {
 }
 
 context.prototype.prints = function(string) {
-    this.print(string.replace(/[\\\n\r"']/g, es));
+    if ('undefined' !== typeof string) {
+        this.print(string.replace(/[\\\n\r"']/g, es));
+    }
 }
 
 context.prototype.include = function(template, data) {

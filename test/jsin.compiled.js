@@ -1,4 +1,4 @@
-/* Compiled with jsinc v 0.1.7 */
+/* Compiled with jsinc v 0.1.12 */
 (function(w){
 
 if (!w.jsin) w.jsin = {compiled: {}};
@@ -43,7 +43,7 @@ w.jsin.compiled['mytemplate'] = function() {
 with(this){with(__data){
 print("<!doctype html>\n    <?");
 print("xml encoding=\"utf-8\" ?><!-- indent is not a bug, but check -->\n<h1>Example</h1>\n<p>\n    ");
-print("Check ?>'\"special chars and variable "+ boo);
+print("Check ?>'\" special chars and variable "+ boo);
 print("\n<p>\n    ");
 printh("Check html escaping &<>\"");
 print("\n<p>\n    ");
@@ -114,12 +114,29 @@ var ehs = {
     '"': '&quot;'
 };
 
+var ehas = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;'
+};
+
 function eh(s) {
     return ehs[s] || s;
 }
 
-context.prototype.printh = function(string) {
-    this.print(string.replace(/[&<>"]/g, eh));
+function eha(s) {
+    return ehas[s] || s;
+}
+
+context.prototype.printh = function(string, apos) {
+    if ('undefined' !== typeof string) {
+        if (apos) {
+            this.print(string.replace(/[&<>']/g, eha));
+        } else {
+            this.print(string.replace(/[&<>"]/g, eh));
+        }
+    }
 };
 
 var ess = {
@@ -135,7 +152,9 @@ function es(s) {
 }
 
 context.prototype.prints = function(string) {
-    this.print(string.replace(/[\\\n\r"']/g, es));
+    if ('undefined' !== typeof string) {
+        this.print(string.replace(/[\\\n\r"']/g, es));
+    }
 }
 
 context.prototype.include = function(template, data) {
@@ -163,6 +182,11 @@ context.prototype.layout = function(template, data, callback) {
     if (!callback) {
         callback = data;
         data = this.__data;
+    }
+
+    if (data.excludeLayout && -1 !== data.excludeLayout.indexOf(template)) {
+        callback();
+        return;
     }
 
     var self = this;

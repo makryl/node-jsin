@@ -126,13 +126,14 @@ function addOutput(code, string) {
 function closeTag(code, tpl, eatNewLine) {
     var p;
 
-    while (-1 !== (p = tpl.search(/('|"|\?\>)/))) {
+    while (-1 !== (p = tpl.search(/('|"|\/|\?\>)/))) {
         code.push(tpl.substr(0, p).trim());
         var q = tpl[p];
         tpl = tpl.substr(p + 1);
         if (
             "'" === q ||
-            '"' === q
+            '"' === q ||
+            '/' === q
         ) {
             code.push(q);
             while (-1 !== (p = tpl.indexOf(q))) {

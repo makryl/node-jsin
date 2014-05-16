@@ -13,7 +13,7 @@ var jsin        = require('./index');
 
 var i = 0;
 
-if ('node' === process.argv[i++]) {
+if (process.argv[i++].match(/node$/)) {
     i++;
 }
 
