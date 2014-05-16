@@ -24,7 +24,7 @@ Constructions:
 Functions:
 
 - `print(string)`
-- `printh(string)`
+- `printh(string, [apos])` - if set `apos` to `true`, then apostrophe `'` will be escaped instead of quotes `"`.
 - `prints(string)`
 - `include(template, [data])`
 - `layout(template, [data], callback)`
